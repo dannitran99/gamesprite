@@ -1,0 +1,29 @@
+.charWrapper{
+    position: relative;
+	transform: rotate(0deg);
+}
+
+.character{
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(0deg);
+	width: 48px;
+    height: 48px;
+    top: 50%;
+  background-repeat: no-repeat;
+}
+
+.ruler {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    border: dashed 2px #ccc;
+    border-bottom: none;
+} 
+
+.idle{
+    background-image: url('/images/Woodcutter_idle.png');
+}
+
+.jump{
+    background-image: url('/images/Woodcutter_jump.png');
+}
