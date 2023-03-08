@@ -1,3 +1,4 @@
+
 .charWrapper{
     position: relative;
 	transform: rotate(0deg);
@@ -6,10 +7,11 @@
 .character{
     position: absolute;
     transform: translate(-50%, -50%) rotate(0deg);
-	width: 48px;
-    height: 48px;
+	width: 150px;
+    height: 150px;
     top: 50%;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .ruler {
@@ -26,4 +28,12 @@
 
 .jump{
     background-image: url('/images/Woodcutter_jump.png');
+}
+
+.left{
+    background-image: url('/images/Woodcutter_walkLeft.png');
+}
+
+.right{
+    background-image: url('/images/Woodcutter_walkRight.png');
 }

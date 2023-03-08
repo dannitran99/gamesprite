@@ -1,18 +1,19 @@
 import styles from "@styles/character.module.scss";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
+import { CHAR_SIZE } from "@/src/constance/config";
 import { TIME_CONFIG } from "@/src/constance/config";
 interface IProps {
   timeHold: number;
   isJumping: boolean;
+  charState: string;
 }
 
-const Character = ({ timeHold, isJumping }: IProps) => {
+const Character = ({ timeHold, isJumping, charState }: IProps) => {
   const rulerRef = useRef<HTMLDivElement>(null);
   const characterBoxRef = useRef<HTMLDivElement>(null);
   const characterRef = useRef<HTMLDivElement>(null);
   const intervalChangeImg = useRef(0);
-  const [charState, setCharState] = useState("idle");
 
   useEffect(() => {
     const char = characterRef.current;
@@ -23,7 +24,7 @@ const Character = ({ timeHold, isJumping }: IProps) => {
           var img = 0;
           intervalChangeImg.current = window.setInterval(() => {
             if (img > 3) img = 0;
-            char.style.backgroundPosition = `${-48 * img}px 0px`;
+            char.style.backgroundPosition = `${-CHAR_SIZE.SIZE * img}px 0px`;
             img++;
           }, 300);
           return;
@@ -31,7 +32,23 @@ const Character = ({ timeHold, isJumping }: IProps) => {
           var img = 0;
           intervalChangeImg.current = window.setInterval(() => {
             if (img > 5) img = 0;
-            char.style.backgroundPosition = `${-48 * img}px 0px`;
+            char.style.backgroundPosition = `${-CHAR_SIZE.SIZE * img}px 0px`;
+            img++;
+          }, 300);
+          return;
+        case "left":
+          var img = 5;
+          intervalChangeImg.current = window.setInterval(() => {
+            if (img < 0) img = 5;
+            char.style.backgroundPosition = `${-CHAR_SIZE.SIZE * img}px 0px`;
+            img--;
+          }, 300);
+          return;
+        case "right":
+          var img = 0;
+          intervalChangeImg.current = window.setInterval(() => {
+            if (img > 5) img = 0;
+            char.style.backgroundPosition = `${-CHAR_SIZE.SIZE * img}px 0px`;
             img++;
           }, 300);
           return;
@@ -45,7 +62,6 @@ const Character = ({ timeHold, isJumping }: IProps) => {
     const ruler = rulerRef.current;
     const characterBox = characterBoxRef.current;
     const char = characterRef.current;
-    isJumping && setCharState("jump");
     if (characterBox && ruler && char) {
       characterBox.style.width = `${timeHold}px`;
       characterBox.style.height = `${timeHold}px`;
@@ -63,7 +79,6 @@ const Character = ({ timeHold, isJumping }: IProps) => {
       characterBox.style.transform = "rotate(180deg)";
       char.style.transform = "translate(-50%, -50%) rotate(-180deg)";
       const timer = setTimeout(() => {
-        setCharState("idle");
         characterBox.style.transform = "rotate(0deg)";
         char.style.transform = "translate(-50%, -50%) rotate(0deg)";
         characterBox.style.transition = `transform 0s linear`;
@@ -81,6 +96,8 @@ const Character = ({ timeHold, isJumping }: IProps) => {
         className={clsx({
           [styles.idle]: charState === "idle",
           [styles.jump]: charState === "jump",
+          [styles.left]: charState === "left",
+          [styles.right]: charState === "right",
           [styles.character]: true,
         })}
         ref={characterRef}

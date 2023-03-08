@@ -2,11 +2,19 @@
     position: relative;
     height: 100%;
     width: 100%;
+    background-image:  url('/images/background.png');;
+    background-repeat: repeat-x;
+    background-size: cover;
+}
+
+.cliff{
+    position: absolute;
+    left: 100px;
 }
 
 .char{
     position: absolute;
-    top: 50%;
+    top: 85%;
     left: 100px;
     transform: translate(0, -50%);
 }
